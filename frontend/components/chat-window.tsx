@@ -59,7 +59,7 @@ export function ChatWindow({ fileName, fileSize, onReset }: ChatWindowProps) {
   };
 
   return (
-    <div className="flex-1 w-full max-w-4xl mx-auto flex flex-col h-[calc(100vh-140px)] z-10">
+    <div className="flex-1 w-full max-w-4xl mx-auto flex flex-col min-h-0 z-10">
       {/* Active File Bar */}
       <div className="flex flex-col sm:flex-row gap-4 items-start sm:items-center justify-between mb-6 animate-fade-in-up">
         <FileCard fileName={fileName} fileSize={fileSize} />
