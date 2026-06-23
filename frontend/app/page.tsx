@@ -45,7 +45,7 @@ export default function Home() {
       
       <Header />
       
-      <div className="flex-1 flex flex-col items-center justify-center py-6 px-4 z-10">
+      <div className="flex-1 flex flex-col items-center justify-start py-8 px-4 z-10 w-full">
         <AnimatePresence mode="wait">
           {!activeFile ? (
             <motion.div
