@@ -9,6 +9,22 @@ interface ChatMessageProps {
   message: ChatMessageType;
 }
 
+function parseMarkdown(text: string): string {
+  // Escape HTML to prevent XSS
+  let html = text
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;");
+
+  // Parse bold markdown: **text** -> <strong class="font-bold text-white">text</strong>
+  html = html.replace(/\*\*(.*?)\*\*/g, '<strong class="font-bold text-white">$1</strong>');
+
+  // Parse bullet points: lines starting with "* " or "- " -> "• "
+  html = html.replace(/^\s*[\*\-]\s+(.*)$/gm, "• $1");
+
+  return html;
+}
+
 export function ChatMessage({ message }: ChatMessageProps) {
   const isUser = message.role === "user";
 
@@ -38,7 +54,10 @@ export function ChatMessage({ message }: ChatMessageProps) {
             : "bg-zinc-900/60 border border-white/5 text-zinc-100 rounded-tl-none"
         }`}
       >
-        <p className="whitespace-pre-line text-sm">{message.content}</p>
+        <p 
+          className="whitespace-pre-line text-sm"
+          dangerouslySetInnerHTML={{ __html: parseMarkdown(message.content) }}
+        />
 
         {/* References Badges */}
         {!isUser && message.sources && message.sources.length > 0 && (
