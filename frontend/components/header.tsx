@@ -4,7 +4,14 @@ import Link from "next/link";
 import { BookOpen, Github } from "lucide-react";
 import { motion } from "framer-motion";
 
-export function Header() {
+export function Header({ onReset }: { onReset?: () => void }) {
+  const handleLogoClick = (e: React.MouseEvent) => {
+    if (onReset) {
+      e.preventDefault();
+      onReset();
+    }
+  };
+
   return (
     <motion.header 
       initial={{ y: -20, opacity: 0 }}
@@ -13,7 +20,7 @@ export function Header() {
       className="sticky top-0 bg-[#09090b]/80 backdrop-blur-md border-b border-white/5 w-full z-50"
     >
       <div className="mx-auto flex w-full max-w-6xl items-center justify-between px-5 py-4 sm:px-8">
-        <Link href="/" className="flex items-center gap-3 group">
+        <Link href="/" onClick={handleLogoClick} className="flex items-center gap-3 group">
           <div className="relative grid size-10 place-items-center rounded-xl bg-gradient-to-tr from-indigo-500 via-purple-500 to-cyan-400 text-white shadow-lg shadow-indigo-500/10 group-hover:scale-105 transition-transform">
             <BookOpen size={20} />
             <div className="absolute inset-0 rounded-xl bg-gradient-to-tr from-indigo-500 via-purple-500 to-cyan-400 blur-sm opacity-50 -z-10 group-hover:opacity-80 transition-opacity" />
