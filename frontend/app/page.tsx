@@ -38,7 +38,7 @@ export default function Home() {
   };
 
   return (
-    <main className="min-h-screen flex flex-col relative overflow-hidden bg-bg-dark text-zinc-100 selection:bg-indigo-500/20">
+    <main className="min-h-screen flex flex-col relative overflow-hidden bg-[#09090b] text-zinc-100 selection:bg-indigo-500/20">
       {/* Decorative background glow elements */}
       <div className="absolute top-[-20%] left-[-10%] w-[600px] h-[600px] bg-indigo-500/5 rounded-full blur-[120px] pointer-events-none" />
       <div className="absolute bottom-[-10%] right-[-10%] w-[600px] h-[600px] bg-cyan-500/5 rounded-full blur-[120px] pointer-events-none" />

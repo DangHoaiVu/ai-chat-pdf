@@ -30,7 +30,7 @@ export default function RootLayout({
       className={`${inter.variable} ${lora.variable} h-full antialiased dark`}
       suppressHydrationWarning
     >
-      <body className="min-h-full flex flex-col font-sans bg-bg-dark text-zinc-100" suppressHydrationWarning>
+      <body className="min-h-full flex flex-col font-sans bg-[#09090b] text-zinc-100" suppressHydrationWarning>
         {children}
       </body>
     </html>
