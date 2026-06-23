@@ -28,8 +28,9 @@ export default function RootLayout({
     <html
       lang="vi"
       className={`${manrope.variable} ${lora.variable} h-full antialiased`}
+      suppressHydrationWarning
     >
-      <body className="min-h-full flex flex-col font-sans bg-[#f7f6ef] text-[#10231e]">{children}</body>
+      <body className="min-h-full flex flex-col font-sans bg-[#f7f6ef] text-[#10231e]" suppressHydrationWarning>{children}</body>
     </html>
   );
 }
