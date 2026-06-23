@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
-import { Manrope, Lora } from "next/font/google";
+import { Inter, Lora } from "next/font/google";
 import "./globals.css";
 
-const manrope = Manrope({
+const inter = Inter({
   subsets: ["vietnamese", "latin"],
-  variable: "--font-manrope",
+  variable: "--font-inter",
   display: "swap",
 });
 
@@ -27,10 +27,12 @@ export default function RootLayout({
   return (
     <html
       lang="vi"
-      className={`${manrope.variable} ${lora.variable} h-full antialiased`}
+      className={`${inter.variable} ${lora.variable} h-full antialiased dark`}
       suppressHydrationWarning
     >
-      <body className="min-h-full flex flex-col font-sans bg-[#f7f6ef] text-[#10231e]" suppressHydrationWarning>{children}</body>
+      <body className="min-h-full flex flex-col font-sans bg-bg-dark text-zinc-100" suppressHydrationWarning>
+        {children}
+      </body>
     </html>
   );
 }

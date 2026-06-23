@@ -1,18 +1,42 @@
+"use client";
+
 import Link from "next/link";
-import { BookOpenText } from "lucide-react";
+import { BookOpen, Github } from "lucide-react";
+import { motion } from "framer-motion";
 
 export function Header() {
   return (
-    <header className="mx-auto flex w-full max-w-6xl items-center justify-between px-5 py-6 sm:px-8">
-      <Link href="/" className="flex items-center gap-2.5 font-bold tracking-tight text-ink transition-transform hover:scale-[1.02]">
-        <span className="grid size-10 place-items-center rounded-2xl bg-ink text-white shadow-md">
-          <BookOpenText size={20} />
+    <motion.header 
+      initial={{ y: -20, opacity: 0 }}
+      animate={{ y: 0, opacity: 1 }}
+      transition={{ duration: 0.5, ease: "easeOut" }}
+      className="mx-auto flex w-full max-w-6xl items-center justify-between px-5 py-6 sm:px-8 z-10"
+    >
+      <Link href="/" className="flex items-center gap-3 group">
+        <div className="relative grid size-10 place-items-center rounded-xl bg-gradient-to-tr from-indigo-500 via-purple-500 to-cyan-400 text-white shadow-lg shadow-indigo-500/10 group-hover:scale-105 transition-transform">
+          <BookOpen size={20} />
+          <div className="absolute inset-0 rounded-xl bg-gradient-to-tr from-indigo-500 via-purple-500 to-cyan-400 blur-sm opacity-50 -z-10 group-hover:opacity-80 transition-opacity" />
+        </div>
+        <span className="font-serif text-2xl font-bold tracking-tight text-white group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-white group-hover:to-cyan-200 transition-all duration-300">
+          AI Chat PDF
         </span>
-        <span className="font-serif text-2xl font-bold">AI Chat PDF</span>
       </Link>
-      <span className="rounded-full border border-ink/10 bg-white/70 px-4 py-1.5 text-xs font-bold text-ink/65 shadow-sm">
-        Bởi Hoài Vũ
-      </span>
-    </header>
+      
+      <div className="flex items-center gap-4">
+        <a 
+          href="https://github.com/DangHoaiVu/ai-chat-pdf"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="flex items-center gap-2 px-4 py-2 text-sm font-semibold text-zinc-400 hover:text-white bg-white/5 hover:bg-white/10 rounded-full border border-white/5 hover:border-white/10 transition-all"
+        >
+          <Github size={16} />
+          GitHub
+        </a>
+        <span className="relative inline-flex items-center gap-1.5 rounded-full bg-indigo-500/10 px-3.5 py-1.5 text-xs font-bold text-indigo-400 border border-indigo-500/20">
+          <span className="size-1.5 rounded-full bg-indigo-400 animate-pulse" />
+          Bởi Hoài Vũ
+        </span>
+      </div>
+    </motion.header>
   );
 }
