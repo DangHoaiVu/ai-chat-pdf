@@ -78,7 +78,7 @@ export function ChatWindow({ fileName, fileSize, onReset }: ChatWindowProps) {
       <div className="flex-1 overflow-hidden glass-panel border border-white/5 rounded-[2rem] p-6 space-y-6 shadow-2xl flex flex-col min-h-0 relative">
         <div className="bg-glow glow-indigo/5 top-1/3 left-1/4" />
         
-        <div className="flex-1 overflow-y-auto pr-2 space-y-6 flex flex-col">
+        <div className="flex-1 overflow-y-auto pr-2 space-y-6 flex flex-col min-h-0">
           <AnimatePresence mode="wait">
             {messages.length === 0 ? (
               <EmptyState key="empty" onQuestionClick={handleSuggestClick} />
