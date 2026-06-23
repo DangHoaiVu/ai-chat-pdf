@@ -38,14 +38,18 @@ export default function Home() {
   };
 
   return (
-    <main className="h-screen h-[100dvh] flex flex-col relative overflow-hidden bg-[#09090b] text-zinc-100 selection:bg-indigo-500/20">
+    <main className={`flex flex-col relative bg-[#09090b] text-zinc-100 selection:bg-indigo-500/20 transition-all duration-300 ${
+      activeFile ? "h-screen h-[100dvh] overflow-hidden" : "min-h-screen"
+    }`}>
       {/* Decorative background glow elements */}
       <div className="absolute top-[-20%] left-[-10%] w-[600px] h-[600px] bg-indigo-500/5 rounded-full blur-[120px] pointer-events-none" />
       <div className="absolute bottom-[-10%] right-[-10%] w-[600px] h-[600px] bg-cyan-500/5 rounded-full blur-[120px] pointer-events-none" />
       
       <Header onReset={handleReset} />
       
-      <div className="flex-1 flex flex-col items-center justify-start overflow-hidden py-4 px-4 z-10 w-full min-h-0">
+      <div className={`flex-1 flex flex-col items-center justify-start w-full z-10 ${
+        activeFile ? "overflow-hidden py-4 px-4 min-h-0" : "py-12 px-4"
+      }`}>
         <AnimatePresence mode="wait">
           {!activeFile ? (
             <motion.div
@@ -81,6 +85,16 @@ export default function Home() {
                   </motion.div>
                 ))}
               </div>
+
+              {/* Footer */}
+              <footer className="mt-24 py-8 border-t border-white/5 w-full flex flex-col sm:flex-row items-center justify-between text-zinc-500 text-xs gap-4 px-4">
+                <p>© {new Date().getFullYear()} ChatPDF Pro. Phát triển bởi Hoài Vũ.</p>
+                <div className="flex gap-6">
+                  <a href="#" className="hover:text-white transition-colors">Điều khoản dịch vụ</a>
+                  <a href="#" className="hover:text-white transition-colors">Chính sách bảo mật</a>
+                  <a href="https://github.com/DangHoaiVu/ai-chat-pdf" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">GitHub</a>
+                </div>
+              </footer>
             </motion.div>
           ) : (
             <motion.div
