@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { BookOpen, Github } from "lucide-react";
+import { BookOpen } from "lucide-react";
 import { motion } from "framer-motion";
 
 export function Header({ onReset }: { onReset?: () => void }) {
@@ -31,15 +31,6 @@ export function Header({ onReset }: { onReset?: () => void }) {
         </Link>
         
         <div className="flex items-center gap-4">
-          <a 
-            href="https://github.com/DangHoaiVu/ai-chat-pdf"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex items-center gap-2 px-4 py-2 text-sm font-semibold text-zinc-400 hover:text-white bg-white/5 hover:bg-white/10 rounded-full border border-white/5 hover:border-white/10 transition-all"
-          >
-            <Github size={16} />
-            GitHub
-          </a>
           <span className="relative inline-flex items-center gap-1.5 rounded-full bg-indigo-500/10 px-3.5 py-1.5 text-xs font-bold text-indigo-400 border border-indigo-500/20">
             <span className="size-1.5 rounded-full bg-indigo-400 animate-pulse" />
             Bởi Hoài Vũ

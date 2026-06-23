@@ -115,7 +115,6 @@ export default function Home() {
                 <div className="flex gap-6">
                   <a href="#" className="hover:text-white transition-colors">Điều khoản dịch vụ</a>
                   <a href="#" className="hover:text-white transition-colors">Chính sách bảo mật</a>
-                  <a href="https://github.com/DangHoaiVu/ai-chat-pdf" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">GitHub</a>
                 </div>
               </footer>
             </motion.div>
