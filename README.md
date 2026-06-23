@@ -1,82 +1,74 @@
-# AI Chat PDF (Pro Version)
+# ChatPDF Pro
 
-Một ứng dụng SaaS trí tuệ nhân tạo chuyên nghiệp cho phép tải lên tài liệu PDF và trò chuyện trực tiếp với nội dung tài liệu bằng công nghệ RAG (Retrieval-Augmented Generation) tiên tiến.
-
-[![Frontend Deployment](https://img.shields.io/badge/Frontend-Vercel-black?style=flat-square&logo=vercel)](https://vercel.com)
-[![Backend Deployment](https://img.shields.io/badge/Backend-Hugging--Face-yellow?style=flat-square&logo=huggingface)](https://huggingface.co)
-[![Technology](https://img.shields.io/badge/Stack-Next.js%20%7C%20FastAPI-blue?style=flat-square)](#công-nghệ-sử-dụng)
+Ứng dụng hỗ trợ phân tích và tương tác trực tiếp với tài liệu PDF sử dụng kiến trúc RAG (Retrieval-Augmented Generation). Hệ thống được thiết kế tối ưu hiệu năng thông qua việc tính toán vector embedding cục bộ (local embeddings) và lưu trữ ngữ cảnh thông minh để giảm thiểu chi phí API LLM.
 
 ---
 
-## 🌟 Tính Năng Nổi Bật
+## 🛠️ Công nghệ & Kiến trúc hệ thống
 
-*   **Trải nghiệm người dùng Premium**: Giao diện tối (Dark mode) hiện đại, hiệu ứng kính mờ (glassmorphism) sang trọng và chuyển cảnh mượt mà bằng Framer Motion.
-*   **Trích xuất văn bản tốc độ cao**: Sử dụng thư viện PyMuPDF tối ưu để phân tích tài liệu PDF nhanh chóng và chính xác.
-*   **Tìm kiếm ngữ nghĩa mạnh mẽ**: Cơ sở dữ liệu vector ChromaDB kết hợp mô hình ONNX Embeddings (`ONNXMiniLM_L6_V2`) chạy trực tiếp trên server giúp tối ưu chi phí và tăng tốc độ xử lý.
-*   **Triển khai đám mây tối ưu**:
-    *   **Frontend**: Next.js 16 được xuất bản tĩnh (Static Export) chạy trên hạ tầng mạng toàn cầu của Vercel (tốc độ phản hồi cực nhanh).
-    *   **Backend**: API FastAPI RAG chạy trên Docker Container của Hugging Face Spaces hoàn toàn miễn phí.
+Dự án được xây dựng theo mô hình Monorepo chia làm hai phần chính độc lập:
 
----
+### 1. Frontend (`/frontend`)
+*   **Framework:** Next.js 16 (App Router)
+*   **Giao diện:** Tailwind CSS v4 kết hợp Framer Motion giúp tạo hiệu ứng mượt mà.
+*   **Deployment:** Cấu hình tĩnh (Static HTML Export) chạy trên hạ tầng CDN của Vercel giúp giảm thời gian phản hồi (Cold Start 0ms).
 
-## 🛠️ Công Nghệ Sử Dụng
-
-### Frontend
-*   **Framework**: Next.js 16 (App Router, Turbopack)
-*   **Styling**: Tailwind CSS v4
-*   **Animation**: Framer Motion
-*   **Icons**: Lucide React
-
-### Backend
-*   **API Framework**: FastAPI (Python)
-*   **PDF Parser**: PyMuPDF (fitz)
-*   **Vector Database**: ChromaDB
-*   **Embeddings**: ONNX MiniLM-L6-v2 (Local Embeddings)
-*   **LLM Integration**: Google Gemini API (`gemini-2.5-flash`)
+### 2. Backend (`/backend`)
+*   **API Engine:** FastAPI (Python)
+*   **Xử lý văn bản:** PyMuPDF (fitz) giúp phân tách và đọc tệp PDF tốc độ cao.
+*   **Vector Database:** ChromaDB lưu trữ các đoạn văn bản phục vụ truy xuất ngữ cảnh.
+*   **Embeddings Model:** Sử dụng mô hình chạy offline `ONNXMiniLM_L6_V2` nhằm tối ưu chi phí dịch vụ bên thứ ba và giảm thiểu độ trễ mạng khi số hóa tài liệu.
+*   **Mô hình ngôn ngữ lớn (LLM):** Sử dụng `gemini-2.5-flash` để tổng hợp câu trả lời dựa trên tài liệu được cung cấp.
+*   **Deployment:** Container hóa qua Dockerfile và triển khai trên Hugging Face Spaces.
 
 ---
 
-## 🚀 Hướng Dẫn Chạy Cục Bộ (Local Development)
+## 🚀 Hướng dẫn cài đặt dưới local (Local Development)
 
 ### 1. Cấu hình Backend
-Di chuyển vào thư mục backend và cài đặt môi trường:
 ```bash
 cd backend
 python -m venv venv
-venv\Scripts\activate   # Trên Windows
-source venv/bin/activate # Trên macOS/Linux
+
+# Kích hoạt môi trường ảo
+source venv/bin/activate  # macOS/Linux
+venv\Scripts\activate    # Windows
+
 pip install -r requirements.txt
 ```
-Tạo tệp `.env` trong thư mục `backend` và thêm khóa API của bạn:
+
+Tạo file `.env` trong thư mục `/backend`:
 ```env
-GEMINI_API_KEY=your_gemini_api_key
+GEMINI_API_KEY=your_gemini_api_key_here
 GEMINI_MODEL=gemini-2.5-flash
 FRONTEND_URL=http://localhost:3000
 ```
-Chạy server API:
+
+Chạy server cục bộ:
 ```bash
 uvicorn app.main:app --reload --port 8000
 ```
 
 ### 2. Cấu hình Frontend
-Di chuyển vào thư mục frontend và cài đặt dependencies:
 ```bash
 cd frontend
 npm install
 ```
-Tạo tệp `.env.local` trong thư mục `frontend`:
+
+Tạo file `.env.local` trong thư mục `/frontend`:
 ```env
 NEXT_PUBLIC_API_URL=http://localhost:8000
 ```
-Chạy môi trường phát triển:
+
+Chạy dev server:
 ```bash
 npm run dev
 ```
-Truy cập [http://localhost:3000](http://localhost:3000) trên trình duyệt.
 
 ---
 
-## 🚢 Triển Khai (Deployment)
+## 📦 Triển khai sản phẩm (Production Deployment)
 
-*   **Backend**: Được đóng gói Docker thông qua tệp `Dockerfile` và triển khai tự động trên Hugging Face Spaces.
-*   **Frontend**: Cấu hình chế độ static export (`output: "export"`) và triển khai lên Vercel thông qua cấu hình định tuyến thông minh trong `vercel.json`.
+*   **API Service:** Được đóng gói tự động bằng Docker và chạy trực tiếp trên Hugging Face Space.
+*   **Web Client:** Cấu hình build tĩnh (`output: "export"`) và trỏ thư mục đích thông qua file `vercel.json` ở root để Vercel tự động nhận diện và cập nhật từ nhánh `main`.
+
