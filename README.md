@@ -2,6 +2,8 @@
 
 Ứng dụng hỗ trợ phân tích và tương tác trực tiếp với tài liệu PDF sử dụng kiến trúc RAG (Retrieval-Augmented Generation). Hệ thống được thiết kế tối ưu hiệu năng thông qua việc tính toán vector embedding cục bộ (local embeddings) và lưu trữ ngữ cảnh thông minh để giảm thiểu chi phí API LLM.
 
+![ChatPDF Pro Screenshot](assets/screenshot.png)
+
 ---
 
 ## 🛠️ Công nghệ & Kiến trúc hệ thống
